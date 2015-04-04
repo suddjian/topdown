@@ -23,6 +23,8 @@ FPS = 60
 WIDTH, HEIGHT = 1024,768
 TILE_SIZE = 4
 
+
+### Opens a new game windo
 noise_w = WIDTH / TILE_SIZE
 noise_h = HEIGHT / TILE_SIZE
 noise_f = 1.25
