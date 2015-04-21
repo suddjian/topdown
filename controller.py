@@ -1,7 +1,7 @@
 import pygame
 
-import game
-from entity_system import Component
+import engine.game
+from engine.entity_system import Component
 
 
 class PlayerController(Component):
