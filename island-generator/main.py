@@ -16,7 +16,6 @@ import pygame
 #from perlin_noise import *
 from island_generator import IslandGenerator
 from map_file import Map
-from character import Character
 
 FPS = 60
 
@@ -48,11 +47,6 @@ def main():
 
     world = new_island()
 
-    mainchar = Character(world=world)
-    characters = {'main':mainchar}
-
-    character_image = pygame.Surface((TILE_SIZE, TILE_SIZE))
-    character_image.fill((255,0,0))
 
 
     # IslandGenerator().generate_island(noise_w, noise_h, noise_f, noise_o)
@@ -78,14 +72,6 @@ def main():
                     world.draw_minimap()
                 elif event.key == pygame.K_F9:
                     world.save()
-                elif event.key == pygame.K_UP:
-                    characters['main'].move(0,-1)
-                elif event.key == pygame.K_DOWN:
-                    characters['main'].move(0,1)
-                elif event.key == pygame.K_LEFT:
-                    characters['main'].move(-1,0)
-                elif event.key == pygame.K_RIGHT:
-                    characters['main'].move(1,0)
                 elif event.key == pygame.K_SPACE:
                     world = new_island()
                 elif event.key == pygame.K_z:
@@ -95,8 +81,7 @@ def main():
                     noise_f = noise_f + noise_increment
                     world = new_island()
 
-        screen.blit(world.minimap, (0, 0))
-        screen.blit(character_image, (characters['main'].y*TILE_SIZE, characters['main'].x*TILE_SIZE))
+        screen.blit(world.minimap, (0, 0)))
 
         pygame.display.flip()
 

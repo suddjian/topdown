@@ -1,34 +1,48 @@
 import pygame
-from pygame.locals import *
-import controls
+
+from keybindings import KeyBinding
 
 
 FRAMES_PER_SECOND = 60
 
+key_bindings = KeyBinding()
+
 _resolution = (1024, 768)
 _running = True
-_screen = pygame.display.set_mode(_resolution, pygame.DOUBLEBUF)
+screen = pygame.display.set_mode(_resolution, pygame.DOUBLEBUF)
 
-### Opens a new game window ###
+# a list of things with a loop function
+loop = []
+
+
 def run():
-    pygame.init()
 
+    pygame.init()
     clock = pygame.time.Clock()
 
     while _running:
-        clock.tick(60)
-        print("tick " + str(_running))
+        clock.tick(FRAMES_PER_SECOND)
+
+        screen.fill((0, 0, 0))
+
+        # tick
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 stop()
             elif event.type == pygame.KEYDOWN:
-                controls.call_listeners(event.key)
+                key_bindings.call(event.key)
+        for l in loop:
+            l.loop()
+
+        pygame.display.flip()
+
+    pygame.quit()
 
 
-### Stops the game short ###
 def stop():
     global _running
     _running = False
+
 
 def set_resolution(res):
     global _resolution, _screen
